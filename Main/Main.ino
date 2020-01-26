@@ -6,6 +6,8 @@
 #define WIFI_SSID "Malitha"
 #define WIFI_PASSWORD "racooncity"
 
+#include <NTPClient.h>
+#include <WiFiUdp.h>
 
 SoftwareSerial s(14,12);
 int data;
@@ -19,6 +21,12 @@ float humidityVal;
 
 int serialRecivalIndicatorPin = 5;
 
+const long utcOffsetInSeconds = 19800;
+WiFiUDP ntpUDP;
+NTPClient timeClient(ntpUDP, "pool.ntp.org", utcOffsetInSeconds);
+
+String date [3];
+String Time [2];
 
 void setup() 
 {
@@ -28,6 +36,8 @@ void setup()
   while (!Serial) continue;
 
   ConnectToWifi();
+
+  timeClient.begin();
   
 }
 
@@ -35,4 +45,5 @@ void loop()
 {
   
   SerialRecieval();
+  GetDateandTime();
 }
