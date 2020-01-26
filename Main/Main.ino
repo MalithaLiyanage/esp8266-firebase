@@ -1,6 +1,12 @@
 #include <SoftwareSerial.h>
 #include <ArduinoJson.h>
 
+#include <ESP8266WiFi.h>
+
+#define WIFI_SSID "Malitha"
+#define WIFI_PASSWORD "racooncity"
+
+
 SoftwareSerial s(14,12);
 int data;
 
