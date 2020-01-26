@@ -12,7 +12,7 @@ bool updatepHValue(FirebaseData firebaseData, float value, String userId, int no
   //String jsonStr = "{\"Time :" +  String(Time[0]) + String(Time[1]) + "\":" + String(value)+"}";
   String jsonStr = "{\"pH" +  String(1) + "\":" + String(value)+"}";
   //String jsonStr = "{\""+ String(value)+"}";
-  Serial.println("Gave");
+ // Serial.println("Gave");
   return (Firebase.updateNode(firebaseData, "/ESP8266_Test/ESP8266_Test/"+String(userId)+"/NODE-"+ String(nodeId)+"/"+String(Date[0])+String(Date[1])+String(Date[2])+"/pH_Value/Current", jsonStr));
   
 }
@@ -47,5 +47,12 @@ bool updateNutriCommand(FirebaseData firebaseData, int value, String userId, int
 {
   String jsonStr = "{\"NutriC\":" + String(value)+"}";
   return Firebase.updateNode(firebaseData, "/ESP8266_Test/ESP8266_Test/"+String(userId)+"/NODE-"+ String(nodeId)+"/"+String(Date[0])+String(Date[1])+String(Date[2])+"/Commands/", jsonStr);
+  
+}
+
+bool updateHumidityValue(FirebaseData firebaseData, int value, String userId, int nodeId, String Date [], String Time [])
+{
+  String jsonStr = "{\"Humidity" +  String(1) + "\":" + String(value)+"}";
+  return Firebase.updateNode(firebaseData, "/ESP8266_Test/ESP8266_Test/"+String(userId)+"/NODE-"+ String(nodeId)+"/"+String(Date[0])+String(Date[1])+String(Date[2])+"/Humidity/Current/", jsonStr);
   
 }

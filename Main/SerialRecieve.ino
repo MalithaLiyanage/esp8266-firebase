@@ -1,16 +1,23 @@
 void SerialRecieval()
 {
+  //Serial.println("Hi");
   s.write("s");
   
   StaticJsonBuffer<1000> jsonBuffer;
   JsonObject& root = jsonBuffer.parseObject(s);
   if (root == JsonObject::invalid())
+  {
+    //Serial.println("NO");
     return;
+  }
+    
 
   else
   {  
-
-  
+    Serial.print("i value: ");
+    Serial.println(i);
+    i = 100;
+    
     Serial.println("JSON received and parsed");
   //  root.prettyPrintTo(Serial);
     lightVal = root["light"];
@@ -31,6 +38,7 @@ void SerialRecieval()
     digitalWrite(5, HIGH);
     delay(500);
     digitalWrite(5, LOW);
+
   }
 
 }

@@ -12,6 +12,8 @@
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 
+const int nodeID = 1; // To uniquely identify the node.
+const String userID = "7Qn9OiLQTpXd58Os4sdocsXg46l2"; // TO uniquely identify the user
 
 
 SoftwareSerial s(14,12);
@@ -25,6 +27,7 @@ float tempVal;
 float humidityVal;
 
 int serialRecivalIndicatorPin = 5;
+//int uploadIndicatorPin = 2;
 
 const long utcOffsetInSeconds = 19800;
 WiFiUDP ntpUDP;
@@ -33,11 +36,16 @@ NTPClient timeClient(ntpUDP, "pool.ntp.org", utcOffsetInSeconds);
 String date [3];
 String Time [2];
 
+int i;
+
 FirebaseData firebaseData;
 
 void setup() 
 {
   pinMode(serialRecivalIndicatorPin, OUTPUT);
+  //pinMode(uploadIndicatorPin, OUTPUT);
+  pinMode(2, OUTPUT);
+  
   s.begin(9600);
   Serial.begin(9600);
   while (!Serial) continue;
@@ -59,6 +67,31 @@ void setup()
 void loop() 
 {
   
-  SerialRecieval();
-  GetDateandTime();
-}
+  for(i = 0; i < 100; i++)
+  {
+    SerialRecieval();
+  
+  }
+
+  
+    GetDateandTime();
+
+    bool respH = updatepHValue(firebaseData, phVal, userID, nodeID, date, Time);
+    bool resLight = updateLightValue(firebaseData, lightVal, userID, nodeID, date, Time);
+    bool resTemp = updateTemperatureValue(firebaseData, tempVal, userID, nodeID, date, Time);
+    bool resWater = updateWaterLevelValue(firebaseData, waterVal, userID, nodeID, date, Time);
+    bool resHum = updateHumidityValue(firebaseData, humidityVal, userID, nodeID, date, Time);
+    bool resNutri = updateNutriLevelValue(firebaseData, nutriVal, userID, nodeID, date, Time);
+    
+//    Serial.println("Done");
+//    
+//    digitalWrite(uploadIndicatorPin, HIGH);
+//    delay(500);
+//    digitalWrite(uploadIndicatorPin, LOW);
+//   
+  
+      digitalWrite(2, HIGH);
+      delay(500);
+      digitalWrite(2, LOW);
+      
+}   
