@@ -31,5 +31,6 @@ void SerialRecieval()
     digitalWrite(5, HIGH);
     delay(500);
     digitalWrite(5, LOW);
+  }
 
 }
