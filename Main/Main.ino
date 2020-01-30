@@ -27,7 +27,7 @@ float tempVal;
 float humidityVal;
 
 int serialRecivalIndicatorPin = 5;
-//int uploadIndicatorPin = 2;
+int uploadIndicatorPin = 2;
 
 const long utcOffsetInSeconds = 19800;
 WiFiUDP ntpUDP;
@@ -43,8 +43,8 @@ FirebaseData firebaseData;
 void setup() 
 {
   pinMode(serialRecivalIndicatorPin, OUTPUT);
-  //pinMode(uploadIndicatorPin, OUTPUT);
-  pinMode(2, OUTPUT);
+  pinMode(uploadIndicatorPin, OUTPUT);
+  
   
   s.begin(9600);
   Serial.begin(9600);
@@ -90,8 +90,8 @@ void loop()
 //    digitalWrite(uploadIndicatorPin, LOW);
 //   
   
-      digitalWrite(2, HIGH);
+      digitalWrite(uploadIndicatorPin, HIGH);
       delay(500);
-      digitalWrite(2, LOW);
+      digitalWrite(uploadIndicatorPin, LOW);
       
 }   
