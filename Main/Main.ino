@@ -27,7 +27,10 @@ float tempVal;
 float humidityVal;
 
 int serialRecivalIndicatorPin = 5;
-int uploadIndicatorPin = 2;
+//int uploadIndicatorPin = 2;
+
+int LEDStripPin = 0;  // D3
+int valvePin = 2; // D4
 
 const long utcOffsetInSeconds = 19800;
 WiFiUDP ntpUDP;
@@ -43,7 +46,13 @@ FirebaseData firebaseData;
 void setup() 
 {
   pinMode(serialRecivalIndicatorPin, OUTPUT);
-  pinMode(uploadIndicatorPin, OUTPUT);
+  //pinMode(uploadIndicatorPin, OUTPUT);
+
+  pinMode(2, OUTPUT);
+  pinMode(0, OUTPUT);
+
+  digitalWrite(2, HIGH);
+  digitalWrite(0, HIGH);
   
   
   s.begin(9600);
@@ -90,8 +99,29 @@ void loop()
 //    digitalWrite(uploadIndicatorPin, LOW);
 //   
   
-      digitalWrite(uploadIndicatorPin, HIGH);
-      delay(500);
-      digitalWrite(uploadIndicatorPin, LOW);
-      
+//      digitalWrite(uploadIndicatorPin, HIGH);
+//      delay(500);
+//      digitalWrite(uploadIndicatorPin, LOW);
+
+      //digitalWrite(2, LOW);   // IN 2 
+      //digitalWrite(0, LOW);     // IN 1
+
+      //delay(2000);
+
+      //digitalWrite(2, HIGH);  // IN 2
+      //digitalWrite(0, HIGH);  // IN 1
+
+     if (getLightCommand(firebaseData, userID, nodeID, date))
+     {
+        startLights();
+     }
+     else
+     {
+        endLights();
+     }
+
+     if (getNutriValveCommand(firebaseData, userID, nodeID, date))
+     {
+        openAndcloseNutrientValve();
+     }
 }   

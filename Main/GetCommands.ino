@@ -33,7 +33,7 @@ bool getNutriValveCommand(FirebaseData firebaseData, String userId, int nodeId, 
 
   if (comm == 1)
   {
-    return true; // return true if Co
+    return true; // return true if ON
   }
   else
   {

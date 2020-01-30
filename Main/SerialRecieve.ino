@@ -35,9 +35,9 @@ void SerialRecieval()
     Serial.println(tempVal);
   
 
-    digitalWrite(5, HIGH);
+    digitalWrite(serialRecivalIndicatorPin, HIGH);
     delay(500);
-    digitalWrite(5, LOW);
+    digitalWrite(serialRecivalIndicatorPin, LOW);
 
   }
 
